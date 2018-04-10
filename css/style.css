@@ -1,0 +1,297 @@
+﻿body{
+	text-align:center;
+	font-family:"微软雅黑";
+}
+h2{
+	font-size:18px;
+}
+/***tip***/
+.tip{
+	position:absolute;
+	width:402px;
+	zoom:1;
+	z-index:201;
+}
+.tip .tip-tip{
+	position:absolute;
+	width:11px;height:18px;
+	left:-10px;top:20px;
+	background:#fff url(../images/tip-tip.png) no-repeat;
+	z-index:202;
+}
+.tip .tip-top{
+	position:relative;
+	width:100%;
+	height:11px;
+	background:url(../images/tip-top.png) no-repeat;
+}
+.tip .tip-bottom{
+	position:absolute;
+	width:100%;
+	height:61px;
+	left:0;top:auto;bottom:0;margin-bottom:-61px;
+	background:url(../images/tip-bottom.png) no-repeat;
+}
+.tip .tip-content{
+	position:relative;
+	z-index:201;
+	background:url(../images/tip-middle.png) repeat-y;
+	padding:10px 10px 10px 20px;
+}
+
+/****顶部***/
+
+.top{
+	height:30px;width:100%;padding-top:5px;
+	border-bottom:1px solid #e6e6e6;
+	background:#f1f1f1;
+	text-align:center;
+	z-index:221;
+}
+.top div{
+	margin:0 auto;
+	width:900px;
+	height:100%;
+	text-align:left;
+}
+
+.index{
+	top:300px;
+	_top:expression(eval(document.documentElement.scrollTop+300));
+	*top:expression(eval(document.documentElement.scrollTop+300));
+	height:200px;width:150px;
+	border:0px solid #888;
+	font-size:15px;color:#555;
+	z-index:1;
+}
+.index div{
+	position:absolute;left:0;
+}
+.index a{
+	color:#888;
+	font-weight:bold;
+}
+
+
+body .main{
+	top:50px;
+	margin:0 auto;
+	text-align:left;
+	width:900px;
+}
+
+/***header**/
+.header{
+	height:105px;
+	width:100%;
+}
+.header .nav{
+	right:0;left:auto;
+	top:30px;
+}
+.header .nav a{
+	float:left;
+	display:block;
+	color:#9e9e9e;
+	font-size:20px;
+	font-family:"微软雅黑";
+	margin-left:20px;
+	padding:10px;
+	border: 0px solid #111;
+}
+.header .nav a:hover{
+	background:#aaa;
+	font-weight:bold;
+	color:#fff;
+	border-radius:3px;
+}
+
+/***************首页*******************/
+/****焦点图***/
+.focus-image{
+	height:470px;
+}
+
+/***show-products***/
+.show-products{
+	background:#fff url(../images/line-top.jpg) top repeat-x;
+	padding: 10px 0;
+}
+.show-products .show-products-content{
+	padding:30px 0 ;
+}
+.show-products .show-products-content .show-products-content-article{
+	width:540px;
+	margin-left:10px;
+}
+.show-products-content-article-title{
+	margin-bottom:10px;
+	color:#555;
+}
+.show-products-content-article-title span{
+	font-size:12px;
+	color:#888;
+	margin-left:10px;
+}
+.show-products-content-article p{
+	font-size:14px;
+	color:#777;
+	margin-bottom:5px;
+	line-height:17px;
+}
+
+/******自营产品*******/
+.show-tip-diaoyudao{
+	left:320px;top:30px;
+}
+.show-tip-chongqingxiaomian{
+	left:510px;top:257px;
+}
+.show-tip-zhaijidian{
+	left:680px;top:45px;
+}
+
+.show-tip-button {
+	position:absolute;
+	display:block;
+	border:0px solid #111;
+	width:108px;height:35px;
+}
+.show-tip-diaoyudao-button {
+	top:45px;left:188px;
+}
+.show-tip-chongqingxiaomian-button {
+	top:257px;left:377px;
+}
+.show-tip-zhaijidian-button {
+	top:45px;left:555px;
+}
+
+
+/***************案例页面*******************/
+.show-products-anli{
+	padding:0;
+	border:1px solid #fff;
+}
+.show-products-anli ul{
+	padding:0;
+}
+.show-products-anli ul li{
+	padding:0 14px 40px 0;
+	border: 0px solid #111;
+	width:210px;
+	display:inline;
+}
+.show-products-anli ul li a{
+	color:#111;
+}
+.show-products-anli ul li .show-products-anli-pic{
+	width:100%;
+	height:178px;
+	border-radius:5px;
+	overflow:hidden;
+}
+.show-products-anli ul li .show-products-anli-pic img{
+	width:100%;
+	min-height:100%;
+}
+.show-products-anli ul li h2{
+	overflow:hidden; white-space:nowrap;text-overflow:ellipsis;
+}
+.show-products-anli ul li p{
+	margin:5px 0px 0 0;
+	border: 0px solid #111;overflow:hidden; white-space:nowrap;text-overflow:ellipsis;
+}
+
+
+/***************资讯页面***********************/
+.news-list{
+	color:#666;
+	margin-bottom:100px;
+}
+.news-list li{
+	padding-bottom: 40px;
+}
+.news-list h2 a{
+	color:#444;
+}
+.news-list li p{
+	font-size:14px;line-height:18px;
+	margin:10px 10px 10px 0;
+}
+.news-list .news-list-date{
+	font-size:20px;
+	font-weight:bold;
+}
+.news-list .news-list-button{
+	background:url(../images/news-list-button.jpg);
+	width:111px;height:30px;
+	border:none;
+}
+
+
+
+/*****联系我们*****/
+.contact-us{
+	border-top: 1px solid #d6d6d6;
+	padding:20px 0 0 0;
+	margin-bottom:50px;
+}
+.contact-us table{
+	width:100%;
+	left:70px;
+}
+.contact-us table td{
+	height:50px;
+	font-size:14px;
+	color:#444;
+}
+.contact-us .contact-form{
+	width:770px;
+	margin-top:40px;
+	border: 1px solid #d6d6d6;
+}
+.contact-us .contact-form-title{
+	height:35px;
+	background:#eee url(../images/contact-us-form-title.jpg) no-repeat;
+	border-bottom:1px dotted #d6d6d6;
+}
+.contact-us .contact-form input{
+	height:27px;
+	*height:25px;
+	*line-height:25px;
+	width:200px;
+	padding:0 5px;
+}
+.contact-us .contact-form textarea{
+	width:530px;
+	height:155px;
+	overflow:auto;
+	padding:5px;
+}
+.contact-us .contact-form button{
+	width:136px;
+	height:47px;
+	background:url(../images/contact-us-form-button.jpg);
+	border:none;
+}
+
+/****foot*****/
+.foot{
+	border-top:1px solid #e6e6e6;
+	top:50px;height:200px;
+	background:#f4f4f4;
+	padding:15px;
+	color:#888;
+	font-size:12px;
+	font-family:"宋体";
+}
+.foot a{
+	color:#888;
+}
+.foot p{
+	margin:5px;
+}
+.foot .foot-link{
+	margin-bottom:20px;
+}
