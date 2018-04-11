@@ -30,14 +30,16 @@ textarea{
     float:left;
 }
 #tip{
-    margin:20px;
     display:block;
-    position:absolute;
-    right:0;left:auto;
-    top:100px;
+    position:fixed;
+    left:50%;
+    margin-left:50px;
+    width:100px;
+    top:30%;
     background:#eee;
     padding:20px 40px;
     display:none;
+    text-align:center;
 }
 .header-right{
     margin:20px 20px 20px 0;
@@ -159,7 +161,7 @@ textarea{
 $(document).ready(function(){
 
     function show_tip(msg) {
-        $('#tip').show().html('请先登陆').fadeOut(2000);
+        $('#tip').show().html(msg).fadeOut(2000);
     }
 
     //初始化获取URL列表
@@ -255,6 +257,23 @@ $(document).ready(function(){
             //alert('复制成功');
             show_tip('复制成功');
         }
+    })
+
+    //删除URl
+    $('#main').on('click', '.delete-url', function(){
+        if (!confirm('确定删除此书签？')) {
+            return false;
+        }
+        var $this = $(this);
+        var url = $this.attr('data-url');
+        var content = {
+            url: url,
+        };
+        $.post('save_data.php?a=delete', content, function(res){
+            if (res == 1) {
+                $this.parents('tr').remove();
+            }
+        })
     })
 
     //预览URL

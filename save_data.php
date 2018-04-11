@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-if(empty($_POST['content'])){
+include 'common.php';
+
+if(empty($_POST)){
     exit('0');
 }
 
@@ -25,6 +27,9 @@ switch ($_GET['a']) {
     case 'edit':
         $data = data_edit($dir);
         break;
+    case 'delete':
+        $data = data_delete($dir);
+        break;
 }
 echo $data;
 
@@ -34,9 +39,28 @@ function data_add($dir) {
     if (strpos($data, $content) !== false) {
         echo 0;exit;
     }
-    $data = $content.'    '.date('Y-m-d H:i:s').'    '.date('Y-m-d H:i:s')."\n".$data;
-    file_put_contents($dir.'/data-bak-'.date('Y-m-d-H-i').'.txt', $data);
-    file_put_contents($dir.'/data.txt', $data);
+    $content = $content.'    '.date('Y-m-d H:i:s').'    '.date('Y-m-d H:i:s')."\n".$data;
+
+    save_data_do($dir, $content);
+
+    echo 1;
+}
+
+function data_delete($dir) {
+    $time = date('Y-m-d H:i:s');
+    $url = trim($_POST['url']);
+    $contents = explode("\n", file_get_contents($dir.'/data.txt'));
+    foreach($contents as $k => $line){
+        $line_arr = explode('    ', $line);
+        if ($line_arr[0] == $url) {
+            unset($contents[$k]);
+            break;
+        }
+    }
+    $content = join("\n", $contents);
+
+    save_data_do($dir, $content);
+
     echo 1;
 }
 
@@ -57,8 +81,12 @@ function data_edit($dir) {
     }
     $content = join("\n", $contents);
 
-    file_put_contents($dir.'/data-bak-'.date('Y-m-d-H-i').'.txt', $content);
-    file_put_contents($dir.'/data.txt', $content);
+    save_data_do($dir, $content);
 
     echo 1;
+}
+
+function save_data_do($dir, $content) {
+    file_put_contents($dir.'/data-bak-'.date('Y-m-d-H-i').'.txt', $content);
+    file_put_contents($dir.'/data.txt', $content);
 }

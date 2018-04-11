@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include 'common.php';
+
 //退出登陆
 if (!empty($_GET['a']) && $_GET['a'] == 'logout'){
     $_SESSION = array();

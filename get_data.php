@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include 'common.php';
+
 // print_r($_SERVER);
 
 if (empty($_SESSION['admin'] )) {
@@ -39,6 +41,7 @@ function return_data_by_show($dir) {
                         <td><a href="'.$line_arr[0].'" target="_blank">'.$line_arr[0].'</a></td>
                         <td>
                             <a href="javascript:;" class="copy-url" data-url="'.$line_arr[0].'">复制</a>
+                            <a href="javascript:;" class="delete-url" data-url="'.$line_arr[0].'">删除</a>
                             <a href="javascript:;" class="preview-url" data-url="'.$line_arr[0].'">预览</a>
                         </td>
                         <td>'.$line_arr[1].'</td>
