@@ -1,7 +1,4 @@
 <?php
-session_start();
-
-include 'common.php';
 
 if(empty($_POST)){
     exit('0');

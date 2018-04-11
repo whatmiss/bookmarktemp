@@ -1,8 +1,4 @@
 <?php
-session_start();
-
-include 'common.php';
-
 // print_r($_SERVER);
 
 if (empty($_SESSION['admin'] )) {
