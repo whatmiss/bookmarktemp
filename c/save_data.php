@@ -21,6 +21,9 @@ switch ($_GET['a']) {
     case 'add':
         $data = data_add($dir);
         break;
+    case 'edit_one':
+        $data = data_edit_one($dir);
+        break;
     case 'edit':
         $data = data_edit($dir);
         break;
@@ -29,6 +32,27 @@ switch ($_GET['a']) {
         break;
 }
 echo $data;
+
+function data_edit_one($dir) {
+    $time = date('Y-m-d H:i:s');
+    $url = trim($_POST['url']);
+    $urlOld = trim($_POST['urlOld']);
+    $contents = explode("\n", file_get_contents($dir.'/data.txt'));
+    foreach($contents as $k => $line){
+        $line_arr = explode('    ', $line);
+        if ($line_arr[0] == $urlOld) {
+            $line_arr[0] = str_replace(' ', '%20', $url);
+            $line_arr[2] = date('Y-m-d H:i:s');
+            $contents[$k] = join('    ', $line_arr);
+            break;
+        }
+    }
+    $content = join("\n", $contents);
+
+    save_data_do($dir, $content);
+
+    echo 1;
+}
 
 function data_add($dir) {
     $data = file_get_contents($dir.'/data.txt');

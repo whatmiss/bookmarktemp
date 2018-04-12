@@ -48,6 +48,9 @@ textarea{
     margin:20px 0 50px 0;
     text-align:center;
 }
+#main table input{
+    display:none;
+}
 #main table{
     width:1200px;
     margin:auto;
@@ -82,6 +85,9 @@ textarea{
 }
 #edit-box button{
     margin: 0 40px;
+}
+.edit-url-value{
+    width:600px;
 }
 #add-box{
     text-align:center;
@@ -164,7 +170,7 @@ $(document).ready(function(){
     get_data();
     function get_data() {
         $.get('?c=get_data&a=show', function(res){
-            if (res == -9){
+            if (res == '-9'){
                 $('#login-form').show();
                 $('#loading').hide();
             } else {
@@ -204,6 +210,31 @@ $(document).ready(function(){
         $.post('?c=login&a=logout', function(res){
             localStorage.admin = '';
             location.href = location.href;
+        })
+    })
+
+    //edit
+    $('#main').on('click', '.edit-url', function(){
+        var obj = $(this).parents('tr');
+        obj.find('.url-list').hide();
+        obj.find('.edit-url-value').show();
+        obj.find('.edit-url-save-click').show();
+    })
+    $('#main').on('click', '.edit-url-save-click', function(){
+        var obj = $(this).parents('tr');
+        obj.find('.url-list').show();
+        obj.find('.edit-url-save-click').hide();
+        var urlObj = obj.find('.edit-url-value');
+        urlObj.hide();
+
+        var content = {
+            urlOld: obj.find('.url-list').attr('href'),
+            url: urlObj.val()
+        };
+        $.post('?c=save_data&a=edit_one', content, function(res){
+            if (res == 1){
+                get_data();
+            }
         })
     })
 

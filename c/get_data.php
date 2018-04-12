@@ -34,9 +34,13 @@ function return_data_by_show($dir) {
         // $line_arr[0] = '<a href="'.$line_arr[0].'" target="_blank">'.$line_arr[0].'</a>';
 
         $datas[$k] = '<tr>
-                        <td><a href="'.$line_arr[0].'" target="_blank">'.$line_arr[0].'</a></td>
+                        <td>
+                            <a class="url-list" href="'.$line_arr[0].'" target="_blank">'.$line_arr[0].'</a>
+                            <input type="text" class="edit-url-value" value="'.$line_arr[0].'" /><input type="button" class="edit-url-save-click" value="保存" />
+                        </td>
                         <td>
                             <a href="javascript:;" class="copy-url" data-url="'.$line_arr[0].'">复制</a>
+                            <a href="javascript:;" class="edit-url" data-url="'.$line_arr[0].'">编辑</a>
                             <a href="javascript:;" class="delete-url" data-url="'.$line_arr[0].'">删除</a>
                             <a href="javascript:;" class="preview-url" data-url="'.$line_arr[0].'">预览</a>
                         </td>
