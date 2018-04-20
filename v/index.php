@@ -48,7 +48,7 @@ textarea{
     margin:20px 0 50px 0;
     text-align:center;
 }
-#main table input{
+#main table .edit-url-list-box{
     display:none;
 }
 #main table{
@@ -57,15 +57,34 @@ textarea{
 }
 #main table th{
     padding:5px 0;
-    background:#eee;
+    background:#ddd;
+}
+#main table th.url-list{
+    width:750px;
+}
+#main table .url-list-desc{
+    color:#666;
+    font-size:12px;
 }
 #main table th.time{
     width:150px;
+}
+#main table tr:hover{
+    background:#eee;
 }
 #main table td{
     padding:5px;
     text-align:left;
     border-bottom:1px solid #eee;
+}
+#main table td.do a{
+    font-size:12px;
+}
+#main table td p{
+    margin:2px 0;
+}
+#main table td input{
+    width:600px;
 }
 #edit-box{
     text-align:center;
@@ -86,9 +105,6 @@ textarea{
 #edit-box button{
     margin: 0 40px;
 }
-.edit-url-value{
-    width:600px;
-}
 #add-box{
     text-align:center;
     position:fixed;
@@ -99,7 +115,7 @@ textarea{
     padding:10px;
 }
 #add-box textarea{
-    width:60%;
+    width:30%;
     height:40px;
     float: right;
 }
@@ -151,6 +167,7 @@ textarea{
     </div>
     <div id="add-box">
         <input type="button" id="add-save" value="增加" />
+        <textarea id="add-content-desc" placeholder="输入描述，默认自动抓取URL的title"></textarea>
         <textarea id="add-content" placeholder="输入URL"></textarea>
     </div>
     <div id="preview-url-box">
@@ -213,23 +230,20 @@ $(document).ready(function(){
         })
     })
 
-    //edit
+    //编辑URL one
     $('#main').on('click', '.edit-url', function(){
         var obj = $(this).parents('tr');
-        obj.find('.url-list').hide();
-        obj.find('.edit-url-value').show();
-        obj.find('.edit-url-save-click').show();
+        obj.find('.edit-url-list-param').hide();
+        obj.find('.edit-url-list-box').show();
     })
     $('#main').on('click', '.edit-url-save-click', function(){
         var obj = $(this).parents('tr');
-        obj.find('.url-list').show();
-        obj.find('.edit-url-save-click').hide();
         var urlObj = obj.find('.edit-url-value');
-        urlObj.hide();
 
         var content = {
             urlOld: obj.find('.url-list').attr('href'),
-            url: urlObj.val()
+            url: urlObj.val(),
+            urlDesc: obj.find('.edit-url-desc').val(),
         };
         $.post('?c=save_data&a=edit_one', content, function(res){
             if (res == 1){
@@ -238,7 +252,7 @@ $(document).ready(function(){
         })
     })
 
-    //编辑URL
+    //编辑URL all
     $('#edit').click(function(){
         $.get('?c=get_data&a=edit', function(res){
             $('#edit-content').val(res);
@@ -259,6 +273,7 @@ $(document).ready(function(){
     $('#add-save').click(function(){
         var content = {
             content: $('#add-content').val(),
+            description: $('#add-content-desc').val(),
         };
         $.post('?c=save_data&a=add', content, function(res){
             if (res == 1){

@@ -37,12 +37,24 @@ function data_edit_one($dir) {
     $time = date('Y-m-d H:i:s');
     $url = trim($_POST['url']);
     $urlOld = trim($_POST['urlOld']);
+    $urlDesc = trim($_POST['urlDesc']);
+    //如果desc为空，抓取title
+    if (empty($urlDesc)) {
+        $temp = preg_replace('/\<\!(.)+\>/', '', file_get_contents($url));
+        // echo $temp;exit;
+        $temp = explode('</title>', $temp);
+        $temp = explode('<title>', $temp[0]);
+        $urlDesc = $temp[1];
+    }
+    $urlDesc = preg_replace('/[\s]+/', '', $urlDesc);
+
     $contents = explode("\n", file_get_contents($dir.'/data.txt'));
     foreach($contents as $k => $line){
         $line_arr = explode('    ', $line);
         if ($line_arr[0] == $urlOld) {
             $line_arr[0] = str_replace(' ', '%20', $url);
             $line_arr[2] = date('Y-m-d H:i:s');
+            $line_arr[3] = $urlDesc;
             $contents[$k] = join('    ', $line_arr);
             break;
         }
@@ -56,11 +68,21 @@ function data_edit_one($dir) {
 
 function data_add($dir) {
     $data = file_get_contents($dir.'/data.txt');
-    $content = trim($_POST['content']);
-    if (strpos($data, $content) !== false) {
+    $url = trim($_POST['content']);
+    $description = trim($_POST['description']);
+    if (strpos($data, $url) !== false) {
         echo 0;exit;
     }
-    $content = $content.'    '.date('Y-m-d H:i:s').'    '.date('Y-m-d H:i:s')."\n".$data;
+    //如果desc为空，抓取title
+    if (empty($description)) {
+        $temp = preg_replace('/\<\!(.)+\>/', '', file_get_contents($url));
+        // echo $temp;exit;
+        $temp = explode('</title>', $temp);
+        $temp = explode('<title>', $temp[0]);
+        $description = $temp[1];
+    }
+    $description = preg_replace('/[\s]+/', '', $description);
+    $content = $url.'    '.date('Y-m-d H:i:s').'    '.date('Y-m-d H:i:s').'    '.trim($description)."\n".$data;
 
     save_data_do($dir, $content);
 
@@ -90,14 +112,19 @@ function data_edit($dir) {
     $contents = explode("\n", trim($_POST['content']));
     foreach($contents as $k => $line){
         $line_arr = explode('    ', $line);
-
         //创建时间
         if (empty($line_arr[1])){
             $line_arr[1] = $time;
         }
-
         //修改时间
         $line_arr[2] = $time;
+        //标题
+        if (empty($line_arr[3])) {
+            $line_arr[3] = '';
+        } else {
+            $line_arr[3] = preg_replace('/[\s]+/', '', $line_arr[3]);
+        }
+
         $contents[$k] = join('    ', $line_arr);
     }
     $content = join("\n", $contents);
