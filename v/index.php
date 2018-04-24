@@ -141,6 +141,11 @@ textarea{
     border:none;
     overflow:auto;
 }
+#preview-url-box h3{
+    border-bottom:1px solid #aaa;
+    padding:10px;
+    background:#eee;
+}
 </style>
 <body>
 <div>
@@ -171,6 +176,7 @@ textarea{
         <textarea id="add-content" placeholder="输入URL"></textarea>
     </div>
     <div id="preview-url-box">
+        <h3 id="preview-url-title"></h3>
         <iframe id="preview-url"></iframe>
     </div>
 </div>
@@ -324,6 +330,7 @@ $(document).ready(function(){
         var url = $(this).attr('data-url');
         $('#preview-url-box').show();
         $('#preview-url').attr('src', '').attr('src', url);
+        $('#preview-url-title').html(url)
     }).on('mouseleave', '.preview-url', function(){
         $('#preview-url-box').hide();
         $('#preview-url').attr('src', '');
