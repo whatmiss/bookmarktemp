@@ -45,7 +45,7 @@ textarea{
     top:0;
 }
 #main{
-    margin:20px 0 50px 0;
+    margin:20px 0 120px 0;
     text-align:center;
 }
 #main table .edit-url-list-box{
